@@ -43,4 +43,45 @@ int Graph::num_verts() {
     return 0;
 }
 
+bool Graph::has_edge(int from_idx, int to_idx)
+{
+    if (from_idx < 0 || from_idx >=number_of_verts || to_idx < 0 || to_idx >= number_of_verts)
+        return false;
+
+    for (const auto &edge : adj_list[from_idx])
+    {
+        if (edge.first == to_idx)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+int Graph::edge_weight(int from_idx, int to_idx)
+{
+    if (from_idx < 0 || from_idx >=number_of_verts || to_idx < 0 || to_idx >= number_of_verts)
+        return -1;
+
+    for (const auto &edge : adj_list[from_idx])
+    {
+        if (edge.first == to_idx)
+        {
+            return edge.second;
+        }
+    }
+
+    return -1;
+
+}
+
+std::vector<std::pair<int, int>> Graph::get_connected(int v)
+{
+    if (v < 0 || v >= number_of_verts)
+        return std::vector<std::pair<int, int>>();
+
+    return adj_list[v];
+}
+
 
