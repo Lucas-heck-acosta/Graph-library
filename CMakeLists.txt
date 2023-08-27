@@ -3,4 +3,4 @@ project(GraphLib)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_library(GraphLib graph.cpp mainTest.cpp)
+add_library(GraphLib mainTest.cpp graph.cpp)

@@ -7,7 +7,7 @@
 class Graph {
 
     int number_of_verts;
-    std::vector<std::vector<std::pair<int, int>>> adj_list;
+    std::vector<std::vector<std::pair<int, int> > > adj_list;
 
 
 public:
@@ -19,7 +19,7 @@ public:
     int num_verts();
     bool has_edge(int from_idx, int to_idx);
     int edge_weight(int from_idx, int to_idx);
-    std::vector<std::pair<int, int>> get_connected(int v);
+    std::vector<std::pair<int, int> > get_connected(int v);
 
 };
 

@@ -46,14 +46,14 @@ cmake_ninja_workdir = /Users/lucas/CLionProjects/GraphLib/cmake-build-debug/
 
 build cmake_object_order_depends_target_GraphLib: phony || CMakeFiles/GraphLib.dir
 
-build CMakeFiles/GraphLib.dir/graph.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/lucas/CLionProjects/GraphLib/graph.cpp || cmake_object_order_depends_target_GraphLib
-  DEP_FILE = CMakeFiles/GraphLib.dir/graph.cpp.o.d
+build CMakeFiles/GraphLib.dir/mainTest.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/lucas/CLionProjects/GraphLib/mainTest.cpp || cmake_object_order_depends_target_GraphLib
+  DEP_FILE = CMakeFiles/GraphLib.dir/mainTest.cpp.o.d
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -std=gnu++14
   OBJECT_DIR = CMakeFiles/GraphLib.dir
   OBJECT_FILE_DIR = CMakeFiles/GraphLib.dir
 
-build CMakeFiles/GraphLib.dir/mainTest.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/lucas/CLionProjects/GraphLib/mainTest.cpp || cmake_object_order_depends_target_GraphLib
-  DEP_FILE = CMakeFiles/GraphLib.dir/mainTest.cpp.o.d
+build CMakeFiles/GraphLib.dir/graph.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/lucas/CLionProjects/GraphLib/graph.cpp || cmake_object_order_depends_target_GraphLib
+  DEP_FILE = CMakeFiles/GraphLib.dir/graph.cpp.o.d
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -std=gnu++14
   OBJECT_DIR = CMakeFiles/GraphLib.dir
   OBJECT_FILE_DIR = CMakeFiles/GraphLib.dir
@@ -66,7 +66,7 @@ build CMakeFiles/GraphLib.dir/mainTest.cpp.o: CXX_COMPILER__GraphLib_Debug /User
 #############################################
 # Link the static library libGraphLib.a
 
-build libGraphLib.a: CXX_STATIC_LIBRARY_LINKER__GraphLib_Debug CMakeFiles/GraphLib.dir/graph.cpp.o CMakeFiles/GraphLib.dir/mainTest.cpp.o
+build libGraphLib.a: CXX_STATIC_LIBRARY_LINKER__GraphLib_Debug CMakeFiles/GraphLib.dir/mainTest.cpp.o CMakeFiles/GraphLib.dir/graph.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/GraphLib.dir
