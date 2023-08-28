@@ -40,6 +40,13 @@ Make sure to include the appropriate path to the header and library files in you
 
 
 
+## Example Graph
+
+A graph like this can be built using this library:
+![grap view](graphView.png)
+
+
+see bellow how to create a similar representation.
 ## Example Usage
 
 ```cpp
