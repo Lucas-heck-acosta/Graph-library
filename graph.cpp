@@ -1,4 +1,5 @@
 #include <queue>
+#include <string>
 #include "graph.h"
 
 // Constructor for the Graph class
@@ -93,7 +94,7 @@ std::vector<std::pair<int, int>> Graph::get_connected(int v)
 
 
 
-std::vector<int> Graph::dijkstra_shortest_distances(int source)
+std::vector<int> Graph::dijkstra_shortest_distances(int source, std::vector<int>& previous_nodes)
 {
     const int max = std::numeric_limits<int>::max();
 
@@ -118,9 +119,36 @@ std::vector<int> Graph::dijkstra_shortest_distances(int source)
                 {
                     distances[v] = distances[u] + weight;
                     pq.push({distances[v], v});
+                    previous_nodes[v] = u;
                 }
             }
         }
     }
     return distances;
+}
+
+std::string Graph::shortest_path(int source, int target)
+{
+    std::vector<int> previous_nodes(number_of_verts, -1);
+    std::vector<int> distances = dijkstra_shortest_distances(source, previous_nodes);
+
+    std::vector<int> path;
+    int current = target;
+
+    while (current != -1)
+    {
+        path.insert(path.begin(), current);
+        current = previous_nodes[current];
+    }
+
+    std::string path_string;
+    for (int i = 0; i < path.size(); i++)
+    {
+        path_string += std::to_string(path[i]);
+        if (i < path.size() - 1) {
+            path_string += " - ";
+        }
+    }
+
+    return path_string;
 }

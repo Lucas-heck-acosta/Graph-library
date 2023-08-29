@@ -22,7 +22,8 @@ public:
     std::vector<std::pair<int, int> > get_connected(int v);
 
 
-    std::vector<int> dijkstra_shortest_distances(int source);
+    std::vector<int> dijkstra_shortest_distances(int source, std::vector<int>& previous_nodes);
+    std::string shortest_path(int source, int target);
 
 
 };
