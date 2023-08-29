@@ -21,6 +21,10 @@ public:
     int edge_weight(int from_idx, int to_idx);
     std::vector<std::pair<int, int> > get_connected(int v);
 
+
+    std::vector<int> dijkstra_shortest_distances(int source);
+
+
 };
 
 #endif //GRAPHLIB_GRAPH_H

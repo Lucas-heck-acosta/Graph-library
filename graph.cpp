@@ -1,3 +1,4 @@
+#include <queue>
 #include "graph.h"
 
 // Constructor for the Graph class
@@ -87,4 +88,39 @@ std::vector<std::pair<int, int>> Graph::get_connected(int v)
         return std::vector<std::pair<int, int>>();
 
     return adj_list[v];
+}
+
+
+
+
+std::vector<int> Graph::dijkstra_shortest_distances(int source)
+{
+    const int max = std::numeric_limits<int>::max();
+
+    std::vector<int>distances(number_of_verts, max);
+    distances[source] = 0;
+
+    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int> >, std::greater<> > pq;
+    pq.push({0, source});
+
+    while (!pq.empty())
+    {
+        int u = pq.top().second;
+        pq.pop();
+
+        if (distances[u] < max)
+        {
+            for (const auto &edge : adj_list[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+
+                if (distances[u] + weight < distances[v])
+                {
+                    distances[v] = distances[u] + weight;
+                    pq.push({distances[v], v});
+                }
+            }
+        }
+    }
+    return distances;
 }
