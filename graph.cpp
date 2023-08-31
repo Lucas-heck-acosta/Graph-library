@@ -3,32 +3,32 @@
 #include "graph.h"
 
 // Constructor for the Graph class
-Graph::Graph(int number_of_verts) : number_of_verts(number_of_verts), adj_list(number_of_verts) {}
+Graph::Graph() : number_of_verts(0){}
 
 // Method to add a new vertex to the graph
-void Graph::add_vertex()
+void Graph::add_vertex(const std::string &label)
 {
-    number_of_verts++;
-    adj_list.emplace_back();
+    if(vertex_indices.find(label) == vertex_indices.end())
+    {
+        vertex_indices[label] = number_of_verts++;
+        adj_list.emplace_back();
+    }
 }
 
 // Method to add an edge between two vertices with an optional weight
-bool Graph::add_edge(int from_idx, int to_idx, int weight)
+bool Graph::add_edge(const std::string &from, const std::string to, int weight)
 {
-    if (from_idx < 0 || from_idx >= number_of_verts || to_idx < 0 || to_idx >= number_of_verts)
-        return false;
-
-    for (const auto &edge : adj_list[from_idx])
+    if(vertex_indices.find(from) != vertex_indices.end() && vertex_indices.find(to) != vertex_indices.end())
     {
-        if (edge.first == to_idx)
-        {
-            return false;
-        }
-    }
+        int from_idx = vertex_indices[from];
+        int to_idx = vertex_indices[to];
 
-    // The following line should be outside the loop
-    adj_list[from_idx].emplace_back(to_idx, weight);
-    return true;
+        adj_list[from_idx].emplace_back(to_idx, weight);
+        adj_list[to_idx].emplace_back(from_idx, weight);
+
+        return true;
+    }
+    return false;
 }
 
 // Method to count the total number of edges in the graph
@@ -49,60 +49,69 @@ int Graph::num_verts()
 }
 
 // Method to check if there's an edge between two vertices
-bool Graph::has_edge(int from_idx, int to_idx)
+bool Graph::has_edge(const std::string &from, const std::string to)
 {
-    if (from_idx < 0 || from_idx >= number_of_verts || to_idx < 0 || to_idx >= number_of_verts)
-        return false;
-
-    for (const auto &edge : adj_list[from_idx])
+    if (vertex_indices.find(from) != vertex_indices.end() && vertex_indices.find(to) != vertex_indices.end())
     {
-        if (edge.first == to_idx)
+        int from_idx = vertex_indices[from];
+        int to_idx = vertex_indices[to];
+
+        for (const auto &edge : adj_list[from_idx])
         {
-            return true;
+            if (edge.first == to_idx)
+            {
+                return true;
+            }
         }
     }
+
 
     return false;
 }
 
 // Method to get the weight of an edge between two vertices
-int Graph::edge_weight(int from_idx, int to_idx)
+int Graph::edge_weight(const std::string &from, const std::string to)
 {
-    if (from_idx < 0 || from_idx >= number_of_verts || to_idx < 0 || to_idx >= number_of_verts)
-        return -1;
-
-    for (const auto &edge : adj_list[from_idx])
+    if (vertex_indices.find(from) != vertex_indices.end() && vertex_indices.find(to) != vertex_indices.end())
     {
-        if (edge.first == to_idx)
+        int from_idx = vertex_indices[from];
+        int to_idx = vertex_indices[to];
+
+        for (const auto &edge : adj_list[from_idx])
         {
-            return edge.second;
+            if (edge.first == to_idx)
+            {
+                return edge.second;
+            }
         }
     }
-
     return -1;
 }
 
 // Method to get a list of vertices connected to a given vertex
-std::vector<std::pair<int, int>> Graph::get_connected(int v)
+std::vector<std::pair<int, int> > Graph::get_connected(std::string &label)
 {
-    if (v < 0 || v >= number_of_verts)
-        return std::vector<std::pair<int, int>>();
+    if (vertex_indices.find(label) != vertex_indices.end())
+    {
+        int idx = vertex_indices[label];
+        return adj_list[idx];
+    }
+    return std::vector<std::pair<int, int>>();
 
-    return adj_list[v];
 }
 
 
 
 
-std::vector<int> Graph::dijkstra_shortest_distances(int source, std::vector<int>& previous_nodes)
+std::vector<int> Graph::dijkstra_shortest_distances(const std::string &source, std::vector<int>& previous_nodes)
 {
     const int max = std::numeric_limits<int>::max();
 
     std::vector<int>distances(number_of_verts, max);
-    distances[source] = 0;
+    distances[vertex_indices[source]] = 0;
 
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int> >, std::greater<> > pq;
-    pq.push({0, source});
+    pq.push({0, vertex_indices[source]});
 
     while (!pq.empty())
     {
@@ -127,13 +136,13 @@ std::vector<int> Graph::dijkstra_shortest_distances(int source, std::vector<int>
     return distances;
 }
 
-std::string Graph::shortest_path(int source, int target)
+std::string Graph::shortest_path(const std::string &source, const std::string &target)
 {
     std::vector<int> previous_nodes(number_of_verts, -1);
     std::vector<int> distances = dijkstra_shortest_distances(source, previous_nodes);
 
     std::vector<int> path;
-    int current = target;
+    int current = vertex_indices[target];
 
     while (current != -1)
     {
@@ -144,8 +153,16 @@ std::string Graph::shortest_path(int source, int target)
     std::string path_string;
     for (int i = 0; i < path.size(); i++)
     {
-        path_string += std::to_string(path[i]);
-        if (i < path.size() - 1) {
+        for (const auto& label_idx_pair : vertex_indices)
+        {
+            if (label_idx_pair.second == path[i])
+            {
+                path_string += label_idx_pair.first;
+                break;
+            }
+        }
+        if (i < path.size() - 1)
+        {
             path_string += " - ";
         }
     }

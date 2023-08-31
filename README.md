@@ -43,7 +43,7 @@ Make sure to include the appropriate path to the header and library files in you
 ## Example Graph
 
 A graph like this can be built using this library:
-![grap view](graphView.png)
+![graph view](graphView.png)
 
 
 see bellow how to create a similar representation.
@@ -52,35 +52,30 @@ see bellow how to create a similar representation.
 ```cpp
 #include "graph.h"
 
-int main() {
-    // Create a graph with vertex labels A, B, C, D, E, F, G
-    //                         INDEX ->  0, 1, 2, 3, 4, 5, 6
-    Graph graph(7);
+//labels to be used
+std::vector<std::string> vertex_labels = {"A", "B", "C", "D", "E", "F", "G"};
 
-    // Add vertices and edges
-    //A
-    graph.add_edge(0, 1, 2); // A -> B with weight 2
-    graph.add_edge(0, 2, 3); // A -> C with weight 3
-    //B
-    graph.add_edge(1, 0, 2); // B -> A with weight 2
-    graph.add_edge(1, 4, 4); // B -> E with weight 4
-    graph.add_edge(1, 6, 5); // B -> G with weight 5
-    //C
-    graph.add_edge(2, 1, 3); // C -> A with weight 3
-    graph.add_edge(2, 3, 1); // C -> D with weight 1
-    //D
-    graph.add_edge(3, 2, 1); // D -> C with weight 1
-    graph.add_edge(3, 4, 2); // D -> E with weight 2
-    //E
-    graph.add_edge(4, 3, 2); // E -> D with weight 2
-    graph.add_edge(4, 1, 4); // E -> B with weight 4
-    graph.add_edge(4, 5, 4); // E -> F with weight 4
-    //F
-    graph.add_edge(5, 4, 4); // F -> E with weight 4
-    graph.add_edge(5, 6, 1); // F -> G with weight 1
-    //G
-    graph.add_edge(6, 5, 1); // G -> F with weight 1
-    graph.add_edge(6, 1, 5); // G -> B with weight 5
+Graph graph;
+
+    // Add vertices
+    // Create a graph with vertex labels A, B, C, D, E, F, G
+    for (std::string s : vertex_labels)
+    {
+        graph.add_vertex(s);
+    }
+
+    // Add edges
+    graph.add_edge("A", "B", 2);    //A -> B with weight 2
+    graph.add_edge("A", "C", 3);    //A -> C with weight 3
+    graph.add_edge("B", "E", 4);    //B -> E with weight 4
+    graph.add_edge("B", "G", 5);    //B -> G with weight 5
+    graph.add_edge("C", "D", 1);    //C -> D with weight 1
+    graph.add_edge("D", "E", 2);    // D -> E with weight 2
+    graph.add_edge("E", "F", 4);    // E -> F with weight 4
+    graph.add_edge("F", "G", 1);    // G -> F with weight 1
+
+    std::cout << "Number of vertices: " << graph.num_verts() << std::endl;
+    std::cout << "Number of edges: " << graph.num_edges() << std::endl;
 
     // ... other operations ...
 
@@ -107,26 +102,27 @@ From the same graph above, apply the Dijkstra's algorithm:
 ```cpp
 // ... graph creation ...
 
-// Using dijkstra_shortest_distances to calculate shortest distances
-    int source = 0; // Source vertex
+// Using dijkstra_shortest_distances to calculate the shortest distances
+    int source = "A"; // Source vertex
     std::vector<int> previous_nodes(graph.num_verts(), -1);
     std::vector<int> shortest_distances = graph.dijkstra_shortest_distances(source, previous_nodes);
 
-    for (int i = 0; i < shortest_distances.size(); ++i)
+    std::cout << std::endl << std::endl << "---Dijkstra's Algorithm---" << std::endl;
+    for (int i = 0; i < shortest_distances.size(); i++)
     {
-        std::cout << "Shortest distance from vertex " << source << " to vertex " << i << ": " << shortest_distances[i] << std::endl;
+    std::cout << "Shortest distance from vertex " << source << " to vertex " << vertex_labels[i] << ": " << shortest_distances[i] << std::endl;
     }
 ```
 
 Code output:
 ```
-Shortest distance from vertex 0 to vertex 0: 0
-Shortest distance from vertex 0 to vertex 1: 2
-Shortest distance from vertex 0 to vertex 2: 3
-Shortest distance from vertex 0 to vertex 3: 4
-Shortest distance from vertex 0 to vertex 4: 6
-Shortest distance from vertex 0 to vertex 5: 8
-Shortest distance from vertex 0 to vertex 6: 7
+Shortest distance from vertex A to vertex A: 0
+Shortest distance from vertex A to vertex B: 2
+Shortest distance from vertex A to vertex C: 3
+Shortest distance from vertex A to vertex D: 4
+Shortest distance from vertex A to vertex E: 6
+Shortest distance from vertex A to vertex F: 8
+Shortest distance from vertex A to vertex G: 7
 ```
 
 This represents the shortest path vertex 0 (A) can get to each of the other vertexes.
@@ -137,18 +133,18 @@ This represents the shortest path vertex 0 (A) can get to each of the other vert
 ```cpp
 // ... code from above ...
 // Using shortest_path to calculate and display the shortest path
-    int target = 5; // Target vertex
+    int target = "F"; // Target vertex
     std::string path = graph.shortest_path(source, target);
     std::cout << std::endl << "Shortest path from vertex " << source << " to vertex " << target << " is: " << path << std::endl;
 ```
 
 Code output:
 ```
-Shortest path from vertex 0 to vertex 5 is: 0 - 1 - 6 - 5
+Shortest path from vertex A to vertex F is: A - B - G - F
 ```
 
 Let's visualize this path in the graph:
-![grap view](shortestPath.png)
+![graph view](shortestPath.png)
 
 The red colored edged represent the path showed in function shortest_path.
 
