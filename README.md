@@ -2,6 +2,17 @@
 
 This is a C++ library that provides a basic implementation of a graph data structure with various functionalities.
 
+## Table of Contents
+
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Example Graph](#example-graph)
+- [Example Usage](#example-usage)
+- [Dijkstra's Algorithm](#dijkstras-algorithm)
+- [References](#references)
+
+
 ## Features
 
 - Create a graph with a specified number of vertices.
