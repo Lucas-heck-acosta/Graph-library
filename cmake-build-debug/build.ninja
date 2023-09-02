@@ -58,6 +58,12 @@ build CMakeFiles/GraphLib.dir/graph.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/l
   OBJECT_DIR = CMakeFiles/GraphLib.dir
   OBJECT_FILE_DIR = CMakeFiles/GraphLib.dir
 
+build CMakeFiles/GraphLib.dir/minHeap.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/lucas/CLionProjects/GraphLib/minHeap.cpp || cmake_object_order_depends_target_GraphLib
+  DEP_FILE = CMakeFiles/GraphLib.dir/minHeap.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/GraphLib.dir
+  OBJECT_FILE_DIR = CMakeFiles/GraphLib.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target GraphLib
@@ -66,7 +72,7 @@ build CMakeFiles/GraphLib.dir/graph.cpp.o: CXX_COMPILER__GraphLib_Debug /Users/l
 #############################################
 # Link the static library libGraphLib.a
 
-build libGraphLib.a: CXX_STATIC_LIBRARY_LINKER__GraphLib_Debug CMakeFiles/GraphLib.dir/mainTest.cpp.o CMakeFiles/GraphLib.dir/graph.cpp.o
+build libGraphLib.a: CXX_STATIC_LIBRARY_LINKER__GraphLib_Debug CMakeFiles/GraphLib.dir/mainTest.cpp.o CMakeFiles/GraphLib.dir/graph.cpp.o CMakeFiles/GraphLib.dir/minHeap.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/GraphLib.dir
