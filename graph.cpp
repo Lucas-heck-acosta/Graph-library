@@ -1,6 +1,7 @@
 #include <queue>
 #include <string>
 #include "graph.h"
+#include "minHeap.h"
 
 // Constructor for the Graph class
 Graph::Graph() : number_of_verts(0){}
@@ -110,13 +111,17 @@ std::vector<int> Graph::dijkstra_shortest_distances(const std::string &source, s
     std::vector<int>distances(number_of_verts, max);
     distances[vertex_indices[source]] = 0;
 
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int> >, std::greater<> > pq;
-    pq.push({0, vertex_indices[source]});
-
-    while (!pq.empty())
+    std::vector<std::pair<int, int>> initial_data;
+    for (int i = 0; i < number_of_verts; i++)
     {
-        int u = pq.top().second;
-        pq.pop();
+        initial_data.push_back({distances[i], i});
+    }
+    MinHeap min_heap(initial_data);
+
+    while (!min_heap.is_empty())
+    {
+        std::pair<int, int> min_distance_vertex = min_heap.extract_min();
+        int u = min_distance_vertex.second;
 
         if (distances[u] < max)
         {
@@ -127,7 +132,7 @@ std::vector<int> Graph::dijkstra_shortest_distances(const std::string &source, s
                 if (distances[u] + weight < distances[v])
                 {
                     distances[v] = distances[u] + weight;
-                    pq.push({distances[v], v});
+                    min_heap.insert({distances[v], v});
                     previous_nodes[v] = u;
                 }
             }
@@ -135,7 +140,6 @@ std::vector<int> Graph::dijkstra_shortest_distances(const std::string &source, s
     }
     return distances;
 }
-
 std::string Graph::shortest_path(const std::string &source, const std::string &target)
 {
     std::vector<int> previous_nodes(number_of_verts, -1);
