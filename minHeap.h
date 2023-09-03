@@ -6,17 +6,17 @@
 
 class MinHeap {
 private:
-    std::vector<int> heap;
+    std::vector<std::pair<int, int>> heap;
 
     void _heapify_down(int index);
 
 public:
-    MinHeap(const std::vector<int>& arr = {});
+    MinHeap(const std::vector<std::pair<int, int> >& arr);
 
     void _build_heap();
-    void insert(int element);
-    int get_min();
-    int extract_min();
+    void insert(std::pair<int, int> element);
+    std::pair<int, int> get_min();
+    std::pair<int, int> extract_min();
     bool is_empty();
     int size();
 };

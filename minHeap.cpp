@@ -36,7 +36,7 @@ void MinHeap::_heapify_down(int index)
 }
 
 // Constructor to initialize the heap with an optional vector of elements.
-MinHeap::MinHeap(const std::vector<int>& arr) : heap(arr)
+MinHeap::MinHeap(const std::vector<std::pair<int, int> >& arr) : heap(arr)
 {
     _build_heap(); // Build the heap from the given elements.
 }
@@ -45,13 +45,14 @@ MinHeap::MinHeap(const std::vector<int>& arr) : heap(arr)
 void MinHeap::_build_heap()
 {
     int n = heap.size();
-    for (int i = (n / 2) - 1; i >= 0; --i) {
+    for (int i = (n / 2) - 1; i >= 0; --i)
+    {
         _heapify_down(i); // Heapify each
     }
 }
 
 // Insert a new element into the heap while maintaining the heap property.
-void MinHeap::insert(int element)
+void MinHeap::insert(std::pair<int, int> element)
 {
     heap.push_back(element); // Add the element to the end of the vector.
     int position = heap.size() - 1; // Get the position of the newly added element.
@@ -60,7 +61,8 @@ void MinHeap::insert(int element)
     while (position > 0)
     {
         int parent = (position - 1) / 2;
-        if (element < heap[parent]) {
+        if (element < heap[parent])
+        {
             std::swap(heap[position], heap[parent]);
             position = parent;
         }
@@ -72,7 +74,7 @@ void MinHeap::insert(int element)
 }
 
 // Get the minimum element from the heap (the root).
-int MinHeap::get_min()
+std::pair<int, int> MinHeap::get_min()
 {
     if (heap.empty())
     {
@@ -82,14 +84,14 @@ int MinHeap::get_min()
 }
 
 // Extract and remove the minimum element from the heap.
-int MinHeap::extract_min()
+std::pair<int, int> MinHeap::extract_min()
 {
     if (heap.empty())
     {
         throw std::runtime_error("Heap is empty");
     }
-    int min_val = heap[0]; // Store the minimum element.
-    int last_val = heap.back(); // Get the last element in the vector.
+    std::pair<int, int> min_val = heap[0]; // Store the minimum element.
+    std::pair<int, int> last_val = heap.back(); // Get the last element in the vector.
     heap.pop_back(); // Remove the last element.
 
     if (!heap.empty())
