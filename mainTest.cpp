@@ -19,9 +19,9 @@ int main() {
     graph.add_edge("B", "E", 4);    //B -> E with weight 4
     graph.add_edge("B", "G", 5);    //B -> G with weight 5
     graph.add_edge("C", "D", 1);    //C -> D with weight 1
-    graph.add_edge("D", "E", 2);    // D -> E with weight 2
-    graph.add_edge("E", "F", 4);    // E -> F with weight 4
-    graph.add_edge("F", "G", 1);    // G -> F with weight 1
+    graph.add_edge("D", "E", 2);    //D -> E with weight 2
+    graph.add_edge("E", "F", 4);    //E -> F with weight 4
+    graph.add_edge("F", "G", 1);    //G -> F with weight 1
 
     std::cout << "Number of vertices: " << graph.num_verts() << std::endl;
     std::cout << "Number of edges: " << graph.num_edges() << std::endl;
