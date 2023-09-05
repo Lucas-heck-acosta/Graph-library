@@ -10,6 +10,7 @@ class Graph {
     int number_of_verts;
     std::vector<std::vector<std::pair<int, int> > > adj_list;
     std::map<std::string , int> vertex_indices;
+    std::vector<std::string> vertex_labels;
 
 
 public:
@@ -26,6 +27,8 @@ public:
 
     std::vector<int> dijkstra_shortest_distances(const std::string &source, std::vector<int>& previous_nodes);
     std::string shortest_path(const std::string &source, const std::string &target);
+
+    std::vector<std::pair<int, int>> minimum_spanning_tree(const std::string &start_label);
 
 
 };

@@ -2,6 +2,9 @@
 #include <string>
 #include "graph.h"
 #include "minHeap.h"
+#include <set>
+#include <iostream>
+
 
 // Constructor for the Graph class
 Graph::Graph() : number_of_verts(0){}
@@ -9,10 +12,11 @@ Graph::Graph() : number_of_verts(0){}
 // Method to add a new vertex to the graph
 void Graph::add_vertex(const std::string &label)
 {
-    if(vertex_indices.find(label) == vertex_indices.end())
+    if (vertex_indices.find(label) == vertex_indices.end())
     {
-        vertex_indices[label] = number_of_verts++;
+        vertex_indices[label] = number_of_verts;
         adj_list.emplace_back();
+        number_of_verts++;
     }
 }
 
@@ -173,3 +177,52 @@ std::string Graph::shortest_path(const std::string &source, const std::string &t
 
     return path_string;
 }
+
+std::vector<std::pair<int, int>> Graph::minimum_spanning_tree(const std::string &start_label)
+{
+
+    if (vertex_indices.find(start_label) == vertex_indices.end())
+    {
+        std::cerr << "Start vertex label not found in the graph." << std::endl;
+        return {};
+    }
+
+    int start = vertex_indices[start_label];
+
+    std::vector<std::pair<int, int> > mst;
+
+    MinHeap min_heap;
+    std::set<int> visited;
+
+    for (const auto &edge : adj_list[start])
+    {
+        min_heap.insert({edge.second, edge.first});
+    }
+
+    visited.insert(start);
+
+    while (!min_heap.is_empty())
+    {
+        auto [weight, v] = min_heap.extract_min();
+
+        if (visited.count(v) > 0)
+        {
+            continue;
+        }
+
+        mst.push_back({weight, v});
+        visited.insert(v);
+
+        for (const auto &edge: adj_list[v])
+        {
+            if(visited.count(edge.first) == 0)
+            {
+                min_heap.insert({edge.second, edge.first});
+            }
+        }
+    }
+
+    return mst;
+}
+
+

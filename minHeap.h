@@ -11,6 +11,7 @@ private:
     void _heapify_down(int index);
 
 public:
+    MinHeap() = default;
     MinHeap(const std::vector<std::pair<int, int> >& arr);
 
     void _build_heap();
