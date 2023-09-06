@@ -14,3 +14,6 @@
 4	397	1693951037516741173	CMakeFiles/GraphLib.dir/mainTest.cpp.o	8ae9309f7a3cc2f7
 4	663	1693951037779331444	CMakeFiles/GraphLib.dir/graph.cpp.o	7dedd81a087bfc53
 663	695	1693951037819204000	libGraphLib.a	5c52250da9e24052
+4	342	1694034729552122813	CMakeFiles/GraphLib.dir/mainTest.cpp.o	8ae9309f7a3cc2f7
+4	523	1694034729728848408	CMakeFiles/GraphLib.dir/graph.cpp.o	7dedd81a087bfc53
+523	584	1694034729794887000	libGraphLib.a	5c52250da9e24052

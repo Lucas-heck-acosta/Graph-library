@@ -29,7 +29,7 @@ public:
     std::string shortest_path(const std::string &source, const std::string &target);
 
     std::vector<std::pair<int, int>> minimum_spanning_tree(const std::string &start_label);
-
+    void display_minimum_spanning_tree(const std::vector<std::pair<int, int>>& mst, const std::string& start_label);
 
 };
 
