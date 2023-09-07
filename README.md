@@ -10,6 +10,7 @@ This is a C++ library that provides a basic implementation of a graph data struc
 - [Example Graph](#example-graph)
 - [Example Usage](#example-usage)
 - [Dijkstra's Algorithm](#dijkstras-algorithm)
+- [Minimum Spanning Tree](#minimum-spanning-tree)
 - [References](#references)
 
 
@@ -21,6 +22,8 @@ This is a C++ library that provides a basic implementation of a graph data struc
 - Check the existence of edges between vertices.
 - Retrieve connected vertices and their weights.
 - Count the number of vertices and edges in the graph.
+- Find the shortest path from point A to B.
+- Find minimum spanning tree from graph.
 
 ## Getting Started
 
