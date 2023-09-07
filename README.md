@@ -162,8 +162,40 @@ The red colored edged represent the path showed in function shortest_path.
 it is, calculated using Dijkstra's algorithms, the least costly way to traverse from A to F.
 
 
+## Minimum Spanning Tree
+A Minimum Spanning Tree (MST) is a tree-like subgraph of a given graph that connects all vertices while minimizing the total edge weight or cost.
+It's used to find the most efficient way to connect all points in a network with the least possible resource usage.
+
+### Prim's Algorithm
+1. Pick a root vertex.
+2. Grow the tree by joining the isolated vertex with the smallest edge weight.
+3. Repeat until all vertexes are connected.
+
+### Visualize the process
+
+![mst steps 1-6](mst1-6.png)
+
+#### last step (complete MST)
+![mst step 7](mst7.png)
 
 
+### Code
+```cpp
+    auto mst = graph.minimum_spanning_tree("A");
+    graph.display_minimum_spanning_tree(mst, "A");
+```
 
+#### output
+```
+Minimum Spanning Tree starting from vertex A:
+A - B (Weight: 2)
+A - C (Weight: 3)
+A - D (Weight: 1)
+A - E (Weight: 2)
+A - F (Weight: 4)
+A - G (Weight: 1)
+Total Weight of MST: 13
+```
 ## References
-https://seneca-ictoer.github.io/data-structures-and-algorithms/G-Graphs/dijkstra
+* https://seneca-ictoer.github.io/data-structures-and-algorithms/G-Graphs/dijkstra
+* https://seneca-ictoer.github.io/data-structures-and-algorithms/G-Graphs/mst

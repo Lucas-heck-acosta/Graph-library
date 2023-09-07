@@ -42,5 +42,10 @@ int main() {
 
     std::cout << std::endl << "Shortest path from vertex " << source << " to vertex " << target << " is: " << path << std::endl;
 
+    std::cout << std::endl << std::endl;
+
+    auto mst = graph.minimum_spanning_tree("A");
+    graph.display_minimum_spanning_tree(mst, "A");
+
     return 0;
 }
