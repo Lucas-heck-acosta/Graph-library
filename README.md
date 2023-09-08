@@ -185,18 +185,18 @@ It's used to find the most efficient way to connect all points in a network with
 ### Code
 ```cpp
     auto mst = graph.minimum_spanning_tree("A");
-    graph.display_minimum_spanning_tree(mst, "A");
+    graph.display_minimum_spanning_tree(mst);
 ```
 
 #### output
 ```
-Minimum Spanning Tree starting from vertex A:
+---Minimum Spanning Tree---
 A - B (Weight: 2)
-A - C (Weight: 3)
-A - D (Weight: 1)
-A - E (Weight: 2)
-A - F (Weight: 4)
-A - G (Weight: 1)
+B - C (Weight: 3)
+C - D (Weight: 1)
+D - E (Weight: 2)
+E - F (Weight: 4)
+F - G (Weight: 1)
 Total Weight of MST: 13
 ```
 ## References
