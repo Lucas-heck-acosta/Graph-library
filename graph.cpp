@@ -241,28 +241,20 @@ std::vector<std::tuple<std::string, std::string, int>> Graph::minimum_spanning_t
     return mst;
 }
 
-void Graph::display_minimum_spanning_tree(const std::vector<std::pair<int, int>>& mst, const std::string& start_label)
+void Graph::display_minimum_spanning_tree(const std::vector<std::tuple<std::string, std::string, int>>& mst)
 {
-    std::cout << "Minimum Spanning Tree starting from vertex " << start_label << ":" << std::endl;
+    std::cout << "---Minimum Spanning Tree---" << std::endl;
     int totalWeight = 0;
 
     for (const auto& edge : mst)
     {
-        int weight = edge.first;
-        int vertex = edge.second;
+        int weight = std::get<2>(edge);
+        std::string fromLabel = std::get<0>(edge);
+        std::string toLabel = std::get<1>(edge);
 
-        for (const auto& labelIdxPair : vertex_indices)
-        {
-            if (labelIdxPair.second == vertex)
-            {
-                std::string toLabel = labelIdxPair.first;
+        std::cout << fromLabel << " - " << toLabel << " (Weight: " << weight << ")" << std::endl;
 
-                std::cout << start_label << " - " << toLabel << " (Weight: " << weight << ")" << std::endl;
-
-                totalWeight += weight;
-                break;
-            }
-        }
+        totalWeight += weight;
     }
 
     std::cout << "Total Weight of MST: " << totalWeight << std::endl;

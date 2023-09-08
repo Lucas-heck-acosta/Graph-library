@@ -10,7 +10,6 @@ class Graph {
     int number_of_verts;
     std::vector<std::vector<std::pair<int, int> > > adj_list;
     std::map<std::string , int> vertex_indices;
-    std::vector<std::string> vertex_labels;
 
 
 public:
@@ -29,7 +28,7 @@ public:
     std::string shortest_path(const std::string &source, const std::string &target);
 
     std::vector<std::tuple<std::string, std::string, int> > minimum_spanning_tree(const std::string &start_label);
-    void display_minimum_spanning_tree(const std::vector<std::pair<int, int>>& mst, const std::string& start_label);
+    void display_minimum_spanning_tree(const std::vector<std::tuple<std::string, std::string, int>>& mst);
 
 };
 
