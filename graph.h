@@ -28,7 +28,7 @@ public:
     std::vector<int> dijkstra_shortest_distances(const std::string &source, std::vector<int>& previous_nodes);
     std::string shortest_path(const std::string &source, const std::string &target);
 
-    std::vector<std::pair<int, int>> minimum_spanning_tree(const std::string &start_label);
+    std::vector<std::tuple<std::string, std::string, int> > minimum_spanning_tree(const std::string &start_label);
     void display_minimum_spanning_tree(const std::vector<std::pair<int, int>>& mst, const std::string& start_label);
 
 };

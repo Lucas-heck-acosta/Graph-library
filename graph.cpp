@@ -178,9 +178,8 @@ std::string Graph::shortest_path(const std::string &source, const std::string &t
     return path_string;
 }
 
-std::vector<std::pair<int, int>> Graph::minimum_spanning_tree(const std::string &start_label)
+std::vector<std::tuple<std::string, std::string, int>> Graph::minimum_spanning_tree(const std::string& start_label)
 {
-
     if (vertex_indices.find(start_label) == vertex_indices.end())
     {
         std::cerr << "Start vertex label not found in the graph." << std::endl;
@@ -188,15 +187,17 @@ std::vector<std::pair<int, int>> Graph::minimum_spanning_tree(const std::string 
     }
 
     int start = vertex_indices[start_label];
-
-    std::vector<std::pair<int, int> > mst;
+    std::vector<std::tuple<std::string, std::string, int>> mst; // Change the vector type.
 
     MinHeap min_heap;
     std::set<int> visited;
 
-    for (const auto &edge : adj_list[start])
+    // Keep track of the current "from" label.
+    std::string fromLabel = start_label;
+
+    for (const auto& edge : adj_list[start])
     {
-        min_heap.insert({edge.second, edge.first});
+        min_heap.insert({ edge.second, edge.first });
     }
 
     visited.insert(start);
@@ -210,14 +211,29 @@ std::vector<std::pair<int, int>> Graph::minimum_spanning_tree(const std::string 
             continue;
         }
 
-        mst.push_back({weight, v});
+        // Find the label of the vertex corresponding to its index.
+        std::string toLabel;
+
+        for (const auto& labelIdxPair : vertex_indices)
+        {
+            if (labelIdxPair.second == v)
+            {
+                toLabel = labelIdxPair.first;
+            }
+        }
+
+        mst.push_back({ fromLabel, toLabel, weight });
+
         visited.insert(v);
 
-        for (const auto &edge: adj_list[v])
+        // Update the "from" label for the next iteration.
+        fromLabel = toLabel;
+
+        for (const auto& edge : adj_list[v])
         {
-            if(visited.count(edge.first) == 0)
+            if (visited.count(edge.first) == 0)
             {
-                min_heap.insert({edge.second, edge.first});
+                min_heap.insert({ edge.second, edge.first });
             }
         }
     }
