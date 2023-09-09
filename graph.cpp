@@ -178,40 +178,57 @@ std::string Graph::shortest_path(const std::string &source, const std::string &t
     return path_string;
 }
 
+
+/**
+ * Calculates the Minimum Spanning Tree (MST) of the graph using Prim's Algorithm.
+ *
+ * @param start_label The label of the vertex from which to start building the MST.
+ * @return A vector of tuples representing the edges in the MST. Each tuple contains:
+ *         - The label of the source vertex.
+ *         - The label of the destination vertex.
+ *         - The weight of the edge.
+ */
 std::vector<std::tuple<std::string, std::string, int>> Graph::minimum_spanning_tree(const std::string& start_label)
 {
+    // Check if the starting vertex label exists in the graph.
     if (vertex_indices.find(start_label) == vertex_indices.end())
     {
         std::cerr << "Start vertex label not found in the graph." << std::endl;
         return {};
     }
 
+    // Get the index of the starting vertex.
     int start = vertex_indices[start_label];
-    std::vector<std::tuple<std::string, std::string, int>> mst; // Change the vector type.
 
+    // Initialize the MST and data structures for the algorithm.
+    std::vector<std::tuple<std::string, std::string, int>> mst;
     MinHeap min_heap;
     std::set<int> visited;
 
     // Keep track of the current "from" label.
     std::string fromLabel = start_label;
 
+    // Insert edges from the starting vertex into the min heap.
     for (const auto& edge : adj_list[start])
     {
         min_heap.insert({ edge.second, edge.first });
     }
 
+    // Mark the starting vertex as visited.
     visited.insert(start);
 
+    // Prim's Algorithm: Build the MST.
     while (!min_heap.is_empty())
     {
         auto [weight, v] = min_heap.extract_min();
 
+        // Skip if the destination vertex has already been visited.
         if (visited.count(v) > 0)
         {
             continue;
         }
 
-        // Find the label of the vertex corresponding to its index.
+        // Find the label of the destination vertex using its index.
         std::string toLabel;
 
         for (const auto& labelIdxPair : vertex_indices)
@@ -222,13 +239,14 @@ std::vector<std::tuple<std::string, std::string, int>> Graph::minimum_spanning_t
             }
         }
 
+        // Add the edge to the MST and mark the destination vertex as visited.
         mst.push_back({ fromLabel, toLabel, weight });
-
         visited.insert(v);
 
         // Update the "from" label for the next iteration.
         fromLabel = toLabel;
 
+        // Insert edges from the destination vertex into the min heap.
         for (const auto& edge : adj_list[v])
         {
             if (visited.count(edge.first) == 0)
@@ -241,21 +259,38 @@ std::vector<std::tuple<std::string, std::string, int>> Graph::minimum_spanning_t
     return mst;
 }
 
+/**
+ * Displays the Minimum Spanning Tree (MST) of the graph.
+ *
+ * @param mst A vector of tuples representing the edges in the MST. Each tuple contains:
+ *            - The label of the source vertex.
+ *            - The label of the destination vertex.
+ *            - The weight of the edge.
+ */
 void Graph::display_minimum_spanning_tree(const std::vector<std::tuple<std::string, std::string, int>>& mst)
 {
+    // Print a header indicating the Minimum Spanning Tree.
     std::cout << "---Minimum Spanning Tree---" << std::endl;
+
+    // Initialize a variable to store the total weight of the MST.
     int totalWeight = 0;
 
+    // Iterate through the edges in the MST and display them.
     for (const auto& edge : mst)
     {
+        // Extract the weight, source label, and destination label from the tuple.
         int weight = std::get<2>(edge);
         std::string fromLabel = std::get<0>(edge);
         std::string toLabel = std::get<1>(edge);
 
+        // Display the edge with its weight.
         std::cout << fromLabel << " - " << toLabel << " (Weight: " << weight << ")" << std::endl;
 
+        // Update the total weight of the MST.
         totalWeight += weight;
     }
 
+    // Display the total weight of the MST.
     std::cout << "Total Weight of MST: " << totalWeight << std::endl;
 }
+

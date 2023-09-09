@@ -28,7 +28,7 @@ public:
     std::string shortest_path(const std::string &source, const std::string &target);
 
     std::vector<std::tuple<std::string, std::string, int> > minimum_spanning_tree(const std::string &start_label);
-    void display_minimum_spanning_tree(const std::vector<std::tuple<std::string, std::string, int>>& mst);
+    static void display_minimum_spanning_tree(const std::vector<std::tuple<std::string, std::string, int>>& mst);
 
 };
 
