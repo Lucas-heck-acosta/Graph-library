@@ -139,7 +139,7 @@ Shortest distance from vertex A to vertex F: 8
 Shortest distance from vertex A to vertex G: 7
 ```
 
-This represents the shortest path vertex 0 (A) can get to each of the other vertexes.
+This represents the shortest path vertex 0 (A) can get to each of the other vertices.
 
 
 ### Shortest path representation
@@ -172,7 +172,7 @@ It's used to find the most efficient way to connect all points in a network with
 ### Prim's Algorithm
 1. Pick a root vertex.
 2. Grow the tree by joining the isolated vertex with the smallest edge weight.
-3. Repeat until all vertexes are connected.
+3. Repeat until all vertices are connected.
 
 ### Visualize the process
 
