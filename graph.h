@@ -18,7 +18,7 @@ public:
     void add_vertex(const std::string &label);
     bool add_edge(const std::string &from, const std::string to, int weight = 1);
     int num_edges();
-    int num_verts();
+    int num_verts() const;
     bool has_edge(const std::string &from, const std::string to);
     int edge_weight(const std::string &from, const std::string to);
     std::vector<std::pair<int, int> > get_connected(std::string &label);

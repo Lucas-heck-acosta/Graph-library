@@ -1,5 +1,4 @@
 #include <queue>
-#include <string>
 #include "graph.h"
 #include "minHeap.h"
 #include <set>
@@ -9,9 +8,14 @@
 // Constructor for the Graph class
 Graph::Graph() : number_of_verts(0){}
 
-// Method to add a new vertex to the graph
+/**
+ * Adds a new vertex with the specified label to the graph.
+ *
+ * @param label The label of the vertex to be added.
+ */
 void Graph::add_vertex(const std::string &label)
 {
+    // Check if the vertex with the given label already exists in the graph.
     if (vertex_indices.find(label) == vertex_indices.end())
     {
         vertex_indices[label] = number_of_verts;
@@ -20,8 +24,15 @@ void Graph::add_vertex(const std::string &label)
     }
 }
 
-// Method to add an edge between two vertices with an optional weight
-bool Graph::add_edge(const std::string &from, const std::string to, int weight)
+/**
+ * Adds a new edge between two vertices in the graph.
+ *
+ * @param from   The label of the source vertex.
+ * @param to     The label of the destination vertex.
+ * @param weight The weight of the edge.
+ * @return True if the edge was successfully added, false if either of the vertices doesn't exist.
+ */
+ bool Graph::add_edge(const std::string &from, const std::string to, int weight)
 {
     if(vertex_indices.find(from) != vertex_indices.end() && vertex_indices.find(to) != vertex_indices.end())
     {
@@ -36,7 +47,11 @@ bool Graph::add_edge(const std::string &from, const std::string to, int weight)
     return false;
 }
 
-// Method to count the total number of edges in the graph
+/**
+ * Counts the total number of edges in the graph.
+ *
+ * @return The number of edges in the graph.
+ */
 int Graph::num_edges()
 {
     int num_edges = 0;
@@ -47,8 +62,12 @@ int Graph::num_edges()
     return num_edges;
 }
 
-// Method to get the total number of vertices in the graph
-int Graph::num_verts()
+/**
+ * Returns the total number of vertices in the graph.
+ *
+ * @return The number of vertices in the graph.
+ */
+ int Graph::num_verts() const
 {
     return number_of_verts;
 }
