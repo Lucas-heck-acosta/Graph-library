@@ -71,8 +71,13 @@ int Graph::num_edges()
 {
     return number_of_verts;
 }
-
-// Method to check if there's an edge between two vertices
+/**
+* Checks if an edge exists between two vertices in the graph.
+*
+* @param from The label of the source vertex.
+* @param to   The label of the destination vertex.
+* @return True if an edge exists between the specified vertices, false otherwise.
+*/
 bool Graph::has_edge(const std::string &from, const std::string to)
 {
     if (vertex_indices.find(from) != vertex_indices.end() && vertex_indices.find(to) != vertex_indices.end())
@@ -88,13 +93,17 @@ bool Graph::has_edge(const std::string &from, const std::string to)
             }
         }
     }
-
-
     return false;
 }
 
-// Method to get the weight of an edge between two vertices
-int Graph::edge_weight(const std::string &from, const std::string to)
+/**
+ * Retrieves the weight of an edge between two vertices in the graph.
+ *
+ * @param from The label of the source vertex.
+ * @param to   The label of the destination vertex.
+ * @return The weight of the edge between the specified vertices, or -1 if no such edge exists.
+ */
+ int Graph::edge_weight(const std::string &from, const std::string to)
 {
     if (vertex_indices.find(from) != vertex_indices.end() && vertex_indices.find(to) != vertex_indices.end())
     {
@@ -112,7 +121,12 @@ int Graph::edge_weight(const std::string &from, const std::string to)
     return -1;
 }
 
-// Method to get a list of vertices connected to a given vertex
+/**
+ * Retrieves a vector of connected vertices (neighbors) and their corresponding edge weights for a given vertex.
+ *
+ * @param label The label of the vertex for which connected vertices are to be retrieved.
+ * @return A vector of pairs representing connected vertices and their edge weights, or an empty vector if the vertex is not found.
+ */
 std::vector<std::pair<int, int> > Graph::get_connected(std::string &label)
 {
     if (vertex_indices.find(label) != vertex_indices.end())
@@ -121,12 +135,17 @@ std::vector<std::pair<int, int> > Graph::get_connected(std::string &label)
         return adj_list[idx];
     }
     return std::vector<std::pair<int, int>>();
-
 }
 
 
 
-
+/**
+ * Computes the shortest distances from a source vertex to all other vertices using Dijkstra's algorithm.
+ *
+ * @param source         The label of the source vertex.
+ * @param previous_nodes A vector to store the previous node in the shortest path for each vertex.
+ * @return A vector of shortest distances from the source to all other vertices.
+ */
 std::vector<int> Graph::dijkstra_shortest_distances(const std::string &source, std::vector<int>& previous_nodes)
 {
     const int max = std::numeric_limits<int>::max();
@@ -163,6 +182,14 @@ std::vector<int> Graph::dijkstra_shortest_distances(const std::string &source, s
     }
     return distances;
 }
+
+/**
+ * Computes and returns the shortest path from a source vertex to a target vertex as a string representation.
+ *
+ * @param source The label of the source vertex.
+ * @param target The label of the target vertex.
+ * @return A string representation of the shortest path from the source to the target vertex.
+ */
 std::string Graph::shortest_path(const std::string &source, const std::string &target)
 {
     std::vector<int> previous_nodes(number_of_verts, -1);
