@@ -79,11 +79,11 @@ Graph graph;
     }
 
     // Add edges
-    graph.add_edge("A", "B", 2);    //A -> B with weight 2
-    graph.add_edge("A", "C", 3);    //A -> C with weight 3
-    graph.add_edge("B", "E", 4);    //B -> E with weight 4
-    graph.add_edge("B", "G", 5);    //B -> G with weight 5
-    graph.add_edge("C", "D", 1);    //C -> D with weight 1
+    graph.add_edge("A", "B", 2);    // A -> B with weight 2
+    graph.add_edge("A", "C", 3);    // A -> C with weight 3
+    graph.add_edge("B", "E", 4);    // B -> E with weight 4
+    graph.add_edge("B", "G", 5);    // B -> G with weight 5
+    graph.add_edge("C", "D", 1);    // C -> D with weight 1
     graph.add_edge("D", "E", 2);    // D -> E with weight 2
     graph.add_edge("E", "F", 4);    // E -> F with weight 4
     graph.add_edge("F", "G", 1);    // G -> F with weight 1
